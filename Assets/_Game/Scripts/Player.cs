@@ -4,13 +4,10 @@ using UnityEngine;
 public class Player : Character
 {
     [SerializeField] private Rigidbody2D rb;
-    
-    
     private bool isAttack = false;
     private bool attackKey;
     private bool throwKey;
     
-
     [Header("Move Info")]
     [SerializeField] private float speed;
     private float horizontalInput;
@@ -23,13 +20,13 @@ public class Player : Character
     [SerializeField] private float groundCheckDistance;
     private bool isGrounded;
 
-    private int coin = 0;
-    
-    private Vector3 savePoint;
-
+    [Header("Attack Info")]
     [SerializeField] private Kunai kunaiPrefabs;
     [SerializeField] private Transform throwPoint;
     [SerializeField] private GameObject attackArea;
+
+    private int coin = 0;
+    private Vector3 savePoint;
 
 
     private void Awake()
@@ -64,6 +61,7 @@ public class Player : Character
         isAttack= false;
 
         transform.position= savePoint;
+        
         ChangeAnim("idle");
         DeActiveAttack();
         SavePoint();
@@ -228,9 +226,7 @@ public class Player : Character
 
         if (collision.tag == ("DeathZone"))
         {
-            
             ChangeAnim("die");
-
             Invoke(nameof(OnInit), 1f);
         }
     }
@@ -239,7 +235,6 @@ public class Player : Character
     {
         savePoint = transform.position;
     }
-
 
     public void SetMove(float horizontal)
     {
