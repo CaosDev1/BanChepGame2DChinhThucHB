@@ -10,7 +10,7 @@ public class Character : MonoBehaviour
 
     private float hp;
     
-    public bool isDead => hp <= 0;
+    public bool IsDead => hp <= 0;
 
     private string currentAnimName;
 
@@ -48,10 +48,10 @@ public class Character : MonoBehaviour
 
     public void OnHit(float damage)
     {
-        if (!isDead)
+        if (!IsDead)
         {
             hp -= damage;
-            if(isDead)
+            if(IsDead)
             {
                 hp = 0;
                 OnDeath();

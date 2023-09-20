@@ -9,6 +9,7 @@ public class Player : Character
     private bool isAttack = false;
     private bool attackKey;
     private bool throwKey;
+    
 
     [Header("Move Info")]
     [SerializeField] private float speed;
@@ -30,11 +31,14 @@ public class Player : Character
     [SerializeField] private Transform throwPoint;
     [SerializeField] private GameObject attackArea;
 
-    
 
+    private void Awake()
+    {
+        coin = PlayerPrefs.GetInt("coin", 0);
+    }
     private void Update()
     {
-        if (isDead) return;
+        if (IsDead) return;
 
         CollisonCheck();
         PlayerInput();
@@ -63,6 +67,7 @@ public class Player : Character
         ChangeAnim("idle");
         DeActiveAttack();
         SavePoint();
+        UIManager.Instance.SetCoin(coin);
     }
 
     public override void OnDespawn()
@@ -78,7 +83,7 @@ public class Player : Character
 
     private void PlayerInput()
     {
-        //horizontalInput = Input.GetAxisRaw("Horizontal");
+        horizontalInput = Input.GetAxisRaw("Horizontal");
         jumpKey = (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W));
         attackKey = Input.GetKeyDown(KeyCode.C);
         throwKey = Input.GetKeyDown(KeyCode.V);
@@ -215,6 +220,8 @@ public class Player : Character
         if (collision.tag == ("Coin"))
         {
             coin++;
+            PlayerPrefs.SetInt("coin", coin);
+            UIManager.Instance.SetCoin(coin);
             Destroy(collision.gameObject);
             Debug.Log("Coin: " + coin);
         }
