@@ -34,7 +34,6 @@ public class Character : MonoBehaviour
     {
         ChangeAnim("die");
         Invoke(nameof(OnDespawn), 1.5f);
-        
     }
 
     protected void ChangeAnim(string animName)
