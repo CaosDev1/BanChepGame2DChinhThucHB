@@ -20,7 +20,7 @@ public class Enemy : Character
 
     private void Update()
     { 
-        if(currtentState != null && !IsDead)
+        if(currtentState != null &&  !IsDead)
         {
             currtentState.OnExecute(this);
         }

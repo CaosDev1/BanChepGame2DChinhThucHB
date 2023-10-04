@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : Character
@@ -6,7 +7,7 @@ public class Player : Character
     private bool isAttack = false;
     private bool attackKey;
     private bool throwKey;
-
+    
     [Header("Move Info")]
     [SerializeField] private float speed;
     private float horizontalInput;
@@ -34,11 +35,7 @@ public class Player : Character
     }
     private void Update()
     {
-        if (IsDead)
-        {
-            rb.velocity = Vector2.zero;
-            return;
-        }
+        if (IsDead) return;
 
         CollisonCheck();
         PlayerInput();
@@ -57,14 +54,14 @@ public class Player : Character
         ThrowButton();
     }
 
-    public override void OnInit()
+    public override  void OnInit()
     {
         base.OnInit();
+        
+        isAttack= false;
 
-        isAttack = false;
-
-        transform.position = savePoint;
-
+        transform.position= savePoint;
+        
         ChangeAnim("idle");
         DeActiveAttack();
         SavePoint();
@@ -221,7 +218,7 @@ public class Player : Character
         if (collision.tag == ("Coin"))
         {
             coin++;
-            //PlayerPrefs.SetInt("coin", coin);
+            PlayerPrefs.SetInt("coin", coin);
             UIManager.Instance.SetCoin(coin);
             Destroy(collision.gameObject);
             Debug.Log("Coin: " + coin);
