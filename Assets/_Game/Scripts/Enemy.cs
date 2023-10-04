@@ -41,11 +41,12 @@ public class Enemy : Character
 
     public override void OnDeath()
     {
-        base.OnDeath();
         ChangeState(null);
-        rb.velocity = Vector2.zero;
+        base.OnDeath();
     }
 
+    
+    
     public void ChangeState(IState newState)
     {
         if(currtentState != null)
