@@ -218,7 +218,7 @@ public class Player : Character
         if (collision.tag == ("Coin"))
         {
             coin++;
-            PlayerPrefs.SetInt("coin", coin);
+            //PlayerPrefs.SetInt("coin", coin);
             UIManager.Instance.SetCoin(coin);
             Destroy(collision.gameObject);
             Debug.Log("Coin: " + coin);
