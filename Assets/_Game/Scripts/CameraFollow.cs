@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -8,13 +7,13 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Vector3 offset;
     [SerializeField] private float speed;
 
-    private void Start()
-    {
-        target = FindObjectOfType<Player>().transform;
-    }
 
-    private void LateUpdate()
+    private void Update()
     {
-        transform.position = target.position + offset;
+        
+        if (target != null)
+        {
+            transform.position = target.position + offset;
+        }
     }
 }

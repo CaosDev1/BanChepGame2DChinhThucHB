@@ -28,10 +28,15 @@ public class Player : Character
     private int coin = 0;
     private Vector3 savePoint;
 
+    
+    public static Player Instance;
+
 
     private void Awake()
     {
+        Instance = this;
         coin = PlayerPrefs.GetInt("coin", 0);
+
     }
     private void Update()
     {
@@ -66,6 +71,17 @@ public class Player : Character
         DeActiveAttack();
         SavePoint();
         UIManager.Instance.SetCoin(coin);
+        TurnOffGravity();
+    }
+
+    public void TurnOnGravity()
+    {
+        rb.gravityScale = 4f;
+    }
+
+    public void TurnOffGravity()
+    {
+        rb.gravityScale = 0f;
     }
 
     public override void OnDespawn()

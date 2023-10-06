@@ -10,12 +10,17 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject settingUI;
     [SerializeField] private GameObject welcomeUI;
-    
+    [SerializeField] private GameObject levelSelectionUI;
+
     [SerializeField] private Button playButton;
     [SerializeField] private Button settingButton;
     [SerializeField] private Button welcomeButton;
     [SerializeField] private Button closeSettingButton;
     [SerializeField] private Button closeWelcomeButton;
+
+    [Header("Level Button")]
+    [SerializeField] private Button level1Button;
+    [SerializeField] private GameObject level1Prefabs;
 
     private void OnEnable()
     {
@@ -24,12 +29,16 @@ public class MainMenuUI : MonoBehaviour
         welcomeButton.onClick.AddListener(SwitchWelcomeUI);
         closeSettingButton.onClick.AddListener(SettingClose);
         closeWelcomeButton.onClick.AddListener(SettingClose);
+
+        //Level button
+        level1Button.onClick.AddListener(OpenLevel1);
     }
 
 
     private void PlayGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        mainMenu.SetActive(false);
+        levelSelectionUI.SetActive(true);
     }
 
     private void SwitchSettingUI()
@@ -50,5 +59,14 @@ public class MainMenuUI : MonoBehaviour
         mainMenu.SetActive(true);
         settingUI.SetActive(false);
         welcomeUI.SetActive(false);
+    }
+
+    private void OpenLevel1()
+    {
+        Instantiate(level1Prefabs);
+        
+        levelSelectionUI.SetActive(false);
+
+        Player.Instance.TurnOnGravity();
     }
 }
