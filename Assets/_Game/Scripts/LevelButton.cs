@@ -4,19 +4,21 @@ using UnityEngine.UI;
 
 public class LevelButton : MonoBehaviour
 {
-    [SerializeField] private Button levelButton;
+    [SerializeField] public Button levelButton;
     [SerializeField] private TextMeshProUGUI levelText;
-    [SerializeField] private LevelData leveDataID;
 
     public void OnEnable()
     {
-        levelButton.onClick.AddListener(LevelButtonOnClick);
+        levelButton.onClick.AddListener(() =>
+        {
+            LevelButtonOnClick(2);
+        });
     }
-
-    public void LevelButtonOnClick()
+    public void LevelButtonOnClick(int id)
     {
-        GameObject mapPrefab = Resources.Load<GameObject>("Level1");
+        GameObject mapPrefab = Resources.Load<GameObject>($"Level{id}");
         GameObject currentLevel = Instantiate(mapPrefab);
         Debug.Log($"Id cua level buttonclick: ");
     }
+
 }
