@@ -18,6 +18,13 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button closeSettingButton;
     [SerializeField] private Button closeWelcomeButton;
 
+    public static MainMenuUI Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void OnEnable()
     {
         playButton.onClick.AddListener(PlayGame);
@@ -52,6 +59,16 @@ public class MainMenuUI : MonoBehaviour
         mainMenu.SetActive(true);
         settingUI.SetActive(false);
         welcomeUI.SetActive(false);
+    }
+
+    public void CloseLevelMenu()
+    {
+        levelSelectionUI.SetActive(false);
+    }
+
+    public void OpenLevelMenu()
+    {
+        levelSelectionUI.SetActive(true);
     }
 
     

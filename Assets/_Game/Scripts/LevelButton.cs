@@ -7,18 +7,28 @@ public class LevelButton : MonoBehaviour
     [SerializeField] public Button levelButton;
     [SerializeField] private TextMeshProUGUI levelText;
 
-    public void OnEnable()
+    public void SetData(int id)
     {
         levelButton.onClick.AddListener(() =>
         {
-            LevelButtonOnClick(2);
+            LevelButtonOnClick(id);
+            MainMenuUI.Instance.CloseLevelMenu();
         });
     }
     public void LevelButtonOnClick(int id)
     {
-        GameObject mapPrefab = Resources.Load<GameObject>($"Level{id}");
+        GameObject mapPrefab = Resources.Load<GameObject>($"{LevelName.LEVELSTRING}{id}");
         GameObject currentLevel = Instantiate(mapPrefab);
-        Debug.Log($"Id cua level buttonclick: ");
+        Player.Instance.TurnOnGravity();
     }
 
+    public void SetButtonText(string text)
+    {
+        levelText.text = text;
+    }
+
+    
+
 }
+
+

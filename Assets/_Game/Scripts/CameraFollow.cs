@@ -15,5 +15,9 @@ public class CameraFollow : MonoBehaviour
         {
             transform.position = target.position + offset;
         }
+        else
+        {
+            target = FindObjectOfType<Player>()?.transform;
+        }
     }
 }
